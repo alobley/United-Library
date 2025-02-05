@@ -26,8 +26,8 @@ struct _aligned_(16) AlignedStruct {
 };
 
 #if defined(__x86_64__)
-_sysv_abi_ void CdeclFunction(void) {
-    printf("This function uses the cdecl calling convention.\n");
+_sysv_abi_ void SysvFunction(void) {
+    printf("This function uses the SysV ABI calling convention.\n");
 }
 
 _ms_abi_ void FastcallFunction(void) {
