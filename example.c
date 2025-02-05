@@ -93,7 +93,7 @@ c_style int main(void) {
 
     printf("Calling conventions test:\n");
     #if defined(__x86_64__)
-    CdeclFunction();
+    SysvFunction();
     FastcallFunction();
     #elif defined(__i386__)
     CdeclFunction();
