@@ -1,12 +1,12 @@
 ## The United Library
 This is a C/C++ library that allows C syntax to remain consistent across multiple compilers and C standards, from ANSI C onwards.
-Just add united.h to your C project and follow its syntax rules to make C code that can run on almost all used compilers!
+Just add united.h to your C project and follow its syntax rules to make C code that can run on almost all used compilers, including C++ compilers!
 
 ## Syntax
 The United library changes some syntax around, but was designed to be both readable and nonobstructive to your coding experience.
 
 - **Attributes**
-    - Most compiler-specific attributes are defined like `_[attribute]_` or `_[attribute]_(args)`. It is meant to be easy to unserstand
+    - Most compiler-specific attributes are defined like `_[attribute]_` or `_[attribute]_(args)`. It is meant to be easy to understand.
 
 - The `__asm__` keyword has been simplified to just `asm`, but inline assembly is unsupported by MSVC, so keep that in mind if you use it.
 
