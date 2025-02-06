@@ -12,3 +12,9 @@ compile:
 run:
 	@echo "Running..."
 	@./example
+
+update:
+	@echo "Updating..."
+	@git add .
+	@git commit -m "Minor Update"
+	@git push -u origin main
