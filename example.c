@@ -58,7 +58,7 @@ void LongLongTest(void) {
     printf("%d * %d = %d\n", _long_long_low_(a), _long_long_low_(b), _long_long_low_(result));
 }
 
-_vla_(char, str) = "Hello, world!";
+_vla_(char, str) = "I am a variable length array.";
 
 /* This whole file is made with ANSI C, and should work with the mainstream compilers. The code should not have to change at all. */
 c_style int main(void) {
