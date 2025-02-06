@@ -32,5 +32,7 @@ specifically defined entry point.
 Contributing is always welcome! The library is still incomplete and likely has a few mistakes I missed, and documentation should be made for it too.
 The ultimate goal is to make the ideal interface for C programming where your C code doesn't have to change in any way when compiled in different ways.
 
+If you want to contribute, email me at `rn5866n8@gmail.com`
+
 ## License
 - This software is licensed under the **MIT License**. See the `LICENSE` file in the root directory for more information.
