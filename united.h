@@ -25,24 +25,24 @@ extern "C" {
 /* Define an unreliable multiplatform size_t type */
 typedef unsigned long __size_t_unknown__;
 
-/* Define a type identifier type */
-typedef unsigned char __type_t__;
-
-#define __typ_chr__ 1
-#define __typ_uchr__ 2
-#define __typ_shrt__ 3
-#define __typ_ushrt__ 4
-#define __typ_int__ 5
-#define __typ_uint__ 6
-#define __typ_long__ 7
-#define __typ_ulong__ 8
-#define __typ_llong__ 9
-#define __typ_ullong__ 10
-#define __typ_float__ 11
-#define __typ_double__ 12
-#define __typ_ldouble__ 13
-#define __typ_ptr__ 14
-#define __typ_vptr__ 15
+/* Define a type identifier type (not used at the moment) */
+typedef enum {
+    __typ_chr__ = 1,
+    __typ_uchr__ = 2,
+    __typ_shrt__ = 3,
+    __typ_ushrt__ = 4,
+    __typ_int__ = 5,
+    __typ_uint__ = 6,
+    __typ_long__ = 7,
+    __typ_ulong__ = 8,
+    __typ_llong__ = 9,
+    __typ_ullong__ = 10,
+    __typ_float__ = 11,
+    __typ_double__ = 12,
+    __typ_ldouble__ = 13,
+    __typ_ptr__ = 14,
+    __typ_vptr__ = 15
+} __type_t__;
 
 
 #if defined(__GNUC__)
