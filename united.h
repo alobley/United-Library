@@ -8,7 +8,7 @@ extern "C" {
 /* This means that the syntax of C and C++ (with this library) should be the same regardless of the compiler being used. C++ exclusive features are not supported. */
 /* This is a work in progress and will be updated as needed. */
 
-/* The goal is for multiple standards from Ansi C onwards to be supported and their gaps bridged, with as natural syntax as is possible. */
+/* The goal is for multiple standards from ANSI C onwards to be supported and their gaps bridged, with as natural syntax as is possible and any C/C++ compiler. */
 /* Unfortunately #warning isn't supported by all compilers before c23 so it can't be used. Also, comments must be done like this for ANSI C support. */
 /* Note: some things simply cannot be done. Sacrifices will have to be made. However, backwards compatibility allows the code to remain unchanged regardless. */
 
