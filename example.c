@@ -58,14 +58,14 @@ void LongLongTest(void) {
     printf("%d * %d = %d\n", _long_long_low_(a), _long_long_low_(b), _long_long_low_(result));
 }
 
-_vla_(char, str) = "I am a variable length array.";
+united_vla(char, str) = "I am a variable length array.";
 
 /* This whole file is made with ANSI C, and should work with the mainstream compilers. The code should not have to change at all. */
 c_style int main(void) {
     printf("United.h feature test:\n");
 
     printf("For loop macro test:\n");
-    _for_(int i = 0, i < 10, i++, {
+    united_for(int i = 0, i < 10, i++, {
         printf("%d\n", i);
     })
     printf("\n");

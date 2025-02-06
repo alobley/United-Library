@@ -1,5 +1,5 @@
 ## The United Library
-This is a C/C++ library that allows C syntax to remain consistent across multiple compilers and C standards, from ANSI C onwards.
+This is a C/C++ library that allows C syntax to remain consistent across multiple compilers and C standards, from C89 onwards.
 Just add united.h to your C project and follow its syntax rules to make C code that can run on almost all used compilers, including C++ compilers!
 
 ## Syntax
@@ -22,8 +22,8 @@ The United library changes some syntax around, but was designed to be both reada
 specifically defined entry point.
 
 - **For Loops and Local Variables**
-    - ANSI C has difficult restrictions with its local variables, so the `_for_` macro aims to make a very intuitive for loop interface for making loops.
-    It is best practice for you to use the `_for_` macro for your for loops instead of the built-in C ones for maximum compatibility.
+    - C89 has difficult restrictions with its local variables, so the `united_for` macro aims to make a very intuitive for loop interface for making loops.
+    It is best practice for you to use the `united_for` macro for your for loops instead of the built-in C ones for maximum compatibility.
 
     - ANSI C's variable problems also extend to other varibales, so the `localvar` macro intends to allow local variables to be declared and used anywhere
     in your code, as long as everything that uses it is inside of the macro's context.

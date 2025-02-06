@@ -440,7 +440,7 @@ typedef __builtin_va_list _united_va_list_;
     #define __STDC_VERSION__ 198900L
     /* Allow the definition of for loops with self-contained variables */
     /* The code MUST be in brackets (should be more intuitive) */
-    #define _for_(var, condition, increment, code) { \
+    #define united_for(var, condition, increment, code) { \
         var; \
         while(condition) { \
             code \
@@ -659,7 +659,7 @@ typedef __builtin_va_list _united_va_list_;
 
     inline _ulong_long_ _ulong_long_div_(_ulong_long_ dividend, _ulong_long_ divisor) {
         _ulong_long_ quotient = {0, 0}, remainder = {0, 0};
-        _for_(int i = 63, i >= 0, i--, {
+        united_for(int i = 63, i >= 0, i--, {
             remainder.__high = (remainder.__high << 1) | (remainder.__low >> 31);
             remainder.__low = (remainder.__low << 1) | ((dividend.__high >> i) & 1);
             if ((remainder.__high > divisor.__high) || (remainder.__high == divisor.__high && remainder.__low >= divisor.__low)) {
@@ -673,7 +673,7 @@ typedef __builtin_va_list _united_va_list_;
 
     inline _long_long_ _long_long_div_(_long_long_ dividend, _long_long_ divisor) {
         _long_long_ quotient = {0, 0}, remainder = {0, 0};
-        _for_(int i = 63, i >= 0, i--, {
+        united_for(int i = 63, i >= 0, i--, {
             remainder.__high = (remainder.__high << 1) | (remainder.__low >> 31);
             remainder.__low = (remainder.__low << 1) | ((dividend.__high >> i) & 1);
             if ((remainder.__high > divisor.__high) || (remainder.__high == divisor.__high && remainder.__low >= divisor.__low)) {
@@ -685,8 +685,8 @@ typedef __builtin_va_list _united_va_list_;
         return quotient;
     }
 
-    /* Try to add VLA support for ANSI C compilers (WARNING: IS A POINTER) */
-    #define _vla_(type, name) const type* name
+    /* Try to add VLA support for ANSI C compilers (Warning: is not actually a VLA. Maybe there's another way?) */
+    #define united_vla(type, name) const type* name
 #else
     typedef long long _long_long_;
     #define _make_long_long_(low, high) (((long long)low) | (((long long)high) << 32))
@@ -826,16 +826,16 @@ typedef __builtin_va_list _united_va_list_;
 
     /* Define the nullptr_t type */
     #ifndef nullptr_t
-        #define nullptr_t ((void*)0)
-        #define nullptr const nullptr_t
+        typedef void* nullptr_t;
+        #define nullptr ((nullptr_t)0)
     #endif
 
-    /* Define the _Static_assert keyword (Need C99 and ANSI alternative) */
+    /* Define the _Static_assert keyword (Need C99 and C89 alternative) */
     #ifndef _Static_assert
         #define _Static_assert
     #endif
 
-    /* Define the _Thread_local keyword (Once again, need C99 and ANSI alternative. May differ based on architecture.) */
+    /* Define the _Thread_local keyword (Once again, need C99 and C89 alternative. May differ based on architecture.) */
     #ifndef _Thread_local
         #define _Thread_local
     #endif
