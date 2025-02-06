@@ -364,7 +364,11 @@ typedef enum {
 #define _hot_ __HOT__                                                         /*  Declare that a function is "hot" (likely to be executed) */
 #define _cold_ __COLD__                                                       /*  Declare that a function is "cold" (unlikely to be executed) */
 #define _alloc_align_(x) __ALLOC_ALIGN__(x)                                   /*  Declare that a function allocates memory aligned to x bytes */
-#define _atomic_ __ATOMIC__                                                   /*  Declare that a function or variable is atomic */
+#if __STDC_VERSION__ >= 201112L
+    #define _atomic_ _Atomic                                                  /*  Declare that a function variable is atomic */
+#else
+    #define _atomic_ __ATOMIC__                                               /*  Declare that a function or variable is atomic */
+#endif
 #define _interrupt_ __INTERRUPT__                                             /*  Declare that a function is an interrupt handler */
 
 /*  Calling conventions/ABIs */
