@@ -24,7 +24,7 @@ extern "C" {
 */
 
 /* Define an unreliable multiplatform size_t type */
-typedef unsigned long __size_t_unknown__;
+typedef unsigned long united_size_t;
 
 /* Define a type identifier type (not used at the moment) */
 typedef enum {
@@ -43,7 +43,7 @@ typedef enum {
     __typ_ldouble__ = 13,
     __typ_ptr__ = 14,
     __typ_vptr__ = 15
-} __type_t__;
+} united_type_t__;
 
 
 #if defined(__GNUC__)
@@ -126,170 +126,170 @@ typedef enum {
 
 /*  Attribute definitions based on the compiler being used */
 #if GCC || ICC || TCC /*  GCC is 1 if Clang, all these compilers theoretically support the same attributes */
-    #define __ALIGNED__(x) __attribute__((aligned(x)))
-    #define __MALLOC__(x, y) __attribute__((__malloc__(x, y)))
-    #define __NORETURN__ __attribute__((noreturn))
-    #define __NOTHROW__ __attribute__((nothrow))
-    #define __NONNULL__(x) __attribute__((nonnull(x)))
-    #define __INLINE__ __attribute__((always_inline))
-    #define __DEPRECATED__ __attribute__((deprecated))
-    #define __UNUSED__ __attribute__((unused))
-    #define __FORMAT__(x, y, z) __attribute__((format(x, y, z)))
-    #define __PURE__ __attribute__((pure))
-    #define __CONST__ __attribute__((const))
-    #define __WEAK__ __attribute__((weak))
-    #define __PACKED__ __attribute__((packed))
-    #define __HOT__ __attribute__((hot))
-    #define __COLD__ __attribute__((cold))
-    #define __ALLOC_ALIGN__(x) __attribute__((alloc_align(x)))
-    #define __ALLOC_SIZE__(x, y) __attribute__((alloc_size(x, y)))
-    #define __ATOMIC__ volatile                                         /* Doesn't guaruntee atomicity but should work decently */
-    #define __INTERRUPT__ __attribute__((interrupt))
+    #define ALIGNED__(x) __attribute__((aligned(x)))
+    #define MALLOC__(x, y) __attribute__((__malloc__(x, y)))
+    #define NORETURN__ __attribute__((noreturn))
+    #define NOTHROW__ __attribute__((nothrow))
+    #define NONNULL__(x) __attribute__((nonnull(x)))
+    #define INLINE__ __attribute__((always_inline))
+    #define DEPRECATED__ __attribute__((deprecated))
+    #define UNUSED__ __attribute__((unused))
+    #define FORMAT__(x, y, z) __attribute__((format(x, y, z)))
+    #define PURE__ __attribute__((pure))
+    #define CONST__ __attribute__((const))
+    #define WEAK__ __attribute__((weak))
+    #define PACKED__ __attribute__((packed))
+    #define HOT__ __attribute__((hot))
+    #define COLD__ __attribute__((cold))
+    #define ALLOC_ALIGN__(x) __attribute__((alloc_align(x)))
+    #define ALLOC_SIZE__(x, y) __attribute__((alloc_size(x, y)))
+    #define ATOMIC__ volatile                                         /* Doesn't guaruntee atomicity but should work decently */
+    #define INTERRUPT__ __attribute__((interrupt))
 
     #if defined(__x86_64__) || defined(__i386__)
-        #define __MS_ABI__ __attribute__((ms_abi))
-        #define __SYSV_ABI__ __attribute__((sysv_abi))
-        #define __CDECL__ __attribute__((cdecl))
-        #define __STDCALL__ __attribute__((stdcall))
-        #define __FASTCALL__ __attribute__((fastcall))
+        #define MS_ABI__ __attribute__((ms_abi))
+        #define SYSV_ABI__ __attribute__((sysv_abi))
+        #define CDECL__ __attribute__((cdecl))
+        #define STDCALL__ __attribute__((stdcall))
+        #define FASTCALL__ __attribute__((fastcall))
     #endif
 
     #if defined(__arm__) || defined(__aarch64__)
-        #define __AAPCS__ __attribute__((aapcs))
-        #define __AAPCS_VFP__ __attribute__((aapcs_vfp))
-        #define __AAPCS16__ __attribute__((aapcs16))
-        #define __AAPCS32__ __attribute__((aapcs32))
-        #define __AAPCS64__ __attribute__((aapcs64))
-        #define __APCS__ __attribute__((apcs))
-        #define __APCS_VFP__ __attribute__((apcs_vfp))
-        #define __APCS16__ __attribute__((apcs16))
-        #define __APCS32__ __attribute__((apcs32))
-        #define __APCS64__ __attribute__((apcs64))
+        #define AAPCS__ __attribute__((aapcs))
+        #define AAPCS_VFP__ __attribute__((aapcs_vfp))
+        #define AAPCS16__ __attribute__((aapcs16))
+        #define AAPCS32__ __attribute__((aapcs32))
+        #define AAPCS64__ __attribute__((aapcs64))
+        #define APCS__ __attribute__((apcs))
+        #define APCS_VFP__ __attribute__((apcs_vfp))
+        #define APCS16__ __attribute__((apcs16))
+        #define APCS32__ __attribute__((apcs32))
+        #define APCS64__ __attribute__((apcs64))
     #endif
 
     #if defined(__riscv)
-        #define __RISCV_ABI__ __attribute__((riscv_abi))
+        #define RISCV_ABI__ __attribute__((riscv_abi))
     #endif
 
     #if defined(__powerpc__) || defined(__powerpc64__)
-        #define __PPC_ABI__ __attribute__((ppc_abi))
+        #define PPC_ABI__ __attribute__((ppc_abi))
     #endif
 
     #if defined(__mips__) || defined(__mips64__)
-        #define __MIPS_ABI__ __attribute__((mips_abi))
+        #define MIPS_ABI__ __attribute__((mips_abi))
     #endif
 
     /*  Others... */
 #elif MSVC
-    #define __ALIGNED__(x) __declspec(align(x))
-    #define __MALLOC__(x, y) [[nodiscard]]  /*  closest equivalent */
-    #define __NORETURN__ [[noreturn]]
-    #define __NOTHROW__ noexcept
-    #define __NONNULL__(x) [[gnu::nonnull(x)]]  /*  no direct MSVC equivalent */
-    #define __INLINE__ __forceinline
-    #define __DEPRECATED__ [[deprecated]]
-    #define __UNUSED__ [[maybe_unused]]
-    #define __FORMAT__(x, y, z) [[gnu::format(x, y, z)]]  /*  no direct MSVC equivalent */
-    #define __PURE__ [[gnu::pure]]
-    #define __CONST__ [[gnu::const]]
-    #define __WEAK__ [[gnu::weak]]
-    #define __PACKED__ #pragma pack(push, 1)
-    #define __HOT__ [[msvc::hot]]
-    #define __COLD__ [[msvc::cold]]
-    #define __ALLOC_ALIGN__(x) [[align(x)]]
-    #define __ATOMIC__ [[msvc::atomic]]
-    #define __INTERRUPT__ [[msvc::interrupt]]
+    #define ALIGNED__(x) __declspec(align(x))
+    #define MALLOC__(x, y) [[nodiscard]]  /*  closest equivalent */
+    #define NORETURN__ [[noreturn]]
+    #define NOTHROW__ noexcept
+    #define NONNULL__(x) [[gnu::nonnull(x)]]  /*  no direct MSVC equivalent */
+    #define INLINE__ __forceinline
+    #define DEPRECATED__ [[deprecated]]
+    #define UNUSED__ [[maybe_unused]]
+    #define FORMAT__(x, y, z) [[gnu::format(x, y, z)]]  /*  no direct MSVC equivalent */
+    #define PURE__ [[gnu::pure]]
+    #define CONST__ [[gnu::const]]
+    #define WEAK__ [[gnu::weak]]
+    #define PACKED__ #pragma pack(push, 1)
+    #define HOT__ [[msvc::hot]]
+    #define COLD__ [[msvc::cold]]
+    #define ALLOC_ALIGN__(x) [[align(x)]]
+    #define ATOMIC__ [[msvc::atomic]]
+    #define INTERRUPT__ [[msvc::interrupt]]
 
     #if defined(__x86_64__) || defined(__i386__)
-        #define __MS_API__ [[msvc::dllexport]]
-        #define __SYSV_ABI__ [[gnu::sysv_abi]]  /*  no direct MSVC equivalent */
-        #define __CDECL__ [[msvc::cdecl]]
-        #define __STDCALL__ [[msvc::stdcall]]
-        #define __FASTCALL__ [[msvc::fastcall]]
+        #define MS_API__ [[msvc::dllexport]]
+        #define SYSV_ABI__ [[gnu::sysv_abi]]  /*  no direct MSVC equivalent */
+        #define CDECL__ [[msvc::cdecl]]
+        #define STDCALL__ [[msvc::stdcall]]
+        #define FASTCALL__ [[msvc::fastcall]]
     #endif
 
     #if defined(__arm__) || defined(__aarch64__)
         /*  Generally unsupported by MSVC */
-        #define __AAPCS__ [[gnu::aapcs]]
-        #define __AAPCS_VFP__ [[gnu::aapcs_vfp]]
-        #define __AAPCS16__ [[gnu::aapcs16]]
-        #define __AAPCS32__ [[gnu::aapcs32]]
-        #define __AAPCS64__ [[gnu::aapcs64]]
-        #define __APCS__ [[gnu::apcs]]
-        #define __APCS_VFP__ [[gnu::apcs_vfp]]
-        #define __APCS16__ [[gnu::apcs16]]
-        #define __APCS32__ [[gnu::apcs32]]
-        #define __APCS64__ [[gnu::apcs64]]
+        #define AAPCS__ [[gnu::aapcs]]
+        #define AAPCS_VFP__ [[gnu::aapcs_vfp]]
+        #define AAPCS16__ [[gnu::aapcs16]]
+        #define AAPCS32__ [[gnu::aapcs32]]
+        #define AAPCS64__ [[gnu::aapcs64]]
+        #define APCS__ [[gnu::apcs]]
+        #define APCS_VFP__ [[gnu::apcs_vfp]]
+        #define APCS16__ [[gnu::apcs16]]
+        #define APCS32__ [[gnu::apcs32]]
+        #define APCS64__ [[gnu::apcs64]]
     #endif
 
     #if defined(__riscv)
         /*  Generally unsupported by MSVC */
-        #define __RISCV_ABI__ [[gnu::riscv_abi]]
+        #define RISCV_ABI__ [[gnu::riscv_abi]]
     #endif
 
     #if defined(__powerpc__) || defined(__powerpc64__)
         /*  Generally unsupported by MSVC */
-        #define __PPC_ABI__ [[gnu::ppc_abi]]
+        #define PPC_ABI__ [[gnu::ppc_abi]]
     #endif
 
     #if defined(__mips__) || defined(__mips64__)
         /*  Generally unsupported by MSVC */
-        #define __MIPS_ABI__ [[gnu::mips_abi]]
+        #define MIPS_ABI__ [[gnu::mips_abi]]
     #endif
 
     /*  Others... */
 #elif defined(__cplusplus)
     /*  Default to the C++11 standard (Compiler MUST support C++11 or later. Valid C code is (usually) valid C++ code) */
-    #define __ALIGNED__(x) [[gnu::aligned(x)]]
-    #define __MALLOC__ [[gnu::malloc(x, y)]]
-    #define __NORETURN__ [[gnu::noreturn]]
-    #define __NOTHROW__ noexcept
-    #define __NONNULL__(x) [[gnu::nonnull(x)]]
-    #define __INLINE__ [[gnu::always_inline]]
-    #define __DEPRECATED__ [[gnu::deprecated]]
-    #define __UNUSED__ [[gnu::unused]]
-    #define __FORMAT__(x, y, z) [[gnu::format(x, y, z)]]
-    #define __PURE__ [[gnu::pure]]
-    #define __CONST__ [[gnu::const]]
-    #define __WEAK__ [[gnu::weak]]
-    #define __PACKED__ [[gnu::packed]]
-    #define __HOT__ [[gnu::hot]]
-    #define __COLD__ [[gnu::cold]]
-    #define __ALLOC_ALIGN__(x) [[gnu::alloc_align(x)]]
-    #define __ATOMIC__ [[gnu::atomic]]
-    #define __INTERRUPT__ [[gnu::interrupt]]
+    #define ALIGNED__(x) [[gnu::aligned(x)]]
+    #define MALLOC__ [[gnu::malloc(x, y)]]
+    #define NORETURN__ [[gnu::noreturn]]
+    #define NOTHROW__ noexcept
+    #define NONNULL__(x) [[gnu::nonnull(x)]]
+    #define INLINE__ [[gnu::always_inline]]
+    #define DEPRECATED__ [[gnu::deprecated]]
+    #define UNUSED__ [[gnu::unused]]
+    #define FORMAT__(x, y, z) [[gnu::format(x, y, z)]]
+    #define PURE__ [[gnu::pure]]
+    #define CONST__ [[gnu::const]]
+    #define WEAK__ [[gnu::weak]]
+    #define PACKED__ [[gnu::packed]]
+    #define HOT__ [[gnu::hot]]
+    #define COLD__ [[gnu::cold]]
+    #define ALLOC_ALIGN__(x) [[gnu::alloc_align(x)]]
+    #define ATOMIC__ [[gnu::atomic]]
+    #define INTERRUPT__ [[gnu::interrupt]]
 
     #if defined(__x86_64__) || defined(__i386__)
-        #define __MS_API__ [[gnu::ms_abi]]
-        #define __SYSV_ABI__ [[gnu::sysv_abi]]
-        #define __CDECL__ [[gnu::cdecl]]
-        #define __STDCALL__ [[gnu::stdcall]]
-        #define __FASTCALL__ [[gnu::fastcall]]
+        #define MS_API__ [[gnu::ms_abi]]
+        #define SYSV_ABI__ [[gnu::sysv_abi]]
+        #define CDECL__ [[gnu::cdecl]]
+        #define STDCALL__ [[gnu::stdcall]]
+        #define FASTCALL__ [[gnu::fastcall]]
     #endif
 
     #if defined(__arm__) || defined(__aarch64__)
-        #define __AAPCS__ [[gnu::aapcs]]
-        #define __AAPCS_VFP__ [[gnu::aapcs_vfp]]
-        #define __AAPCS16__ [[gnu::aapcs16]]
-        #define __AAPCS32__ [[gnu::aapcs32]]
-        #define __AAPCS64__ [[gnu::aapcs64]]
-        #define __APCS__ [[gnu::apcs]]
-        #define __APCS_VFP__ [[gnu::apcs_vfp]]
-        #define __APCS16__ [[gnu::apcs16]]
-        #define __APCS32__ [[gnu::apcs32]]
-        #define __APCS64__ [[gnu::apcs64]]
+        #define AAPCS__ [[gnu::aapcs]]
+        #define AAPCS_VFP__ [[gnu::aapcs_vfp]]
+        #define AAPCS16__ [[gnu::aapcs16]]
+        #define AAPCS32__ [[gnu::aapcs32]]
+        #define AAPCS64__ [[gnu::aapcs64]]
+        #define APCS__ [[gnu::apcs]]
+        #define APCS_VFP__ [[gnu::apcs_vfp]]
+        #define APCS16__ [[gnu::apcs16]]
+        #define APCS32__ [[gnu::apcs32]]
+        #define APCS64__ [[gnu::apcs64]]
     #endif
 
     #if defined(__riscv)
-        #define __RISCV_ABI__ [[gnu::riscv_abi]]
+        #define RISCV_ABI__ [[gnu::riscv_abi]]
     #endif
 
     #if defined(__powerpc__) || defined(__powerpc64__)
-        #define __PPC_ABI__ [[gnu::ppc_abi]]
+        #define PPC_ABI__ [[gnu::ppc_abi]]
     #endif
 
     #if defined(__mips__) || defined(__mips64__)
-        #define __MIPS_ABI__ [[gnu::mips_abi]]
+        #define MIPS_ABI__ [[gnu::mips_abi]]
     #endif
 
     /*  Others... */
@@ -298,102 +298,102 @@ typedef enum {
             If you don't want attributes, comment out this line and this library will still work. It's line 296 and 297 in united.h."
     
     /* Define the attributes as empty */
-    #define __ALIGNED__(x)
-    #define __MALLOC__(x, y)
-    #define __NORETURN__
-    #define __NOTHROW__
-    #define __NONNULL__(x)
-    #define __INLINE__
-    #define __DEPRECATED__
-    #define __UNUSED__
-    #define __FORMAT__(x, y, z)
-    #define __PURE__
-    #define __CONST__
-    #define __WEAK__
-    #define __PACKED__
-    #define __HOT__
-    #define __COLD__
-    #define __ALLOC_ALIGN__(x)
-    #define __ATOMIC__
-    #define __INTERRUPT__
+    #define ALIGNED__(x)
+    #define MALLOC__(x, y)
+    #define NORETURN__
+    #define NOTHROW__
+    #define NONNULL__(x)
+    #define INLINE__
+    #define DEPRECATED__
+    #define UNUSED__
+    #define FORMAT__(x, y, z)
+    #define PURE__
+    #define CONST__
+    #define WEAK__
+    #define PACKED__
+    #define HOT__
+    #define COLD__
+    #define ALLOC_ALIGN__(x)
+    #define ATOMIC__
+    #define INTERRUPT__
 
     #if defined(__x86_64__) || defined(__i386__)
-        #define __MS_API__
-        #define __SYSV_ABI__
-        #define __CDECL__
-        #define __STDCALL__
-        #define __FASTCALL__
+        #define MS_API__
+        #define SYSV_ABI__
+        #define CDECL__
+        #define STDCALL__
+        #define FASTCALL__
     #endif
 
     #if defined(__arm__) || defined(__aarch64__)
-        #define __AAPCS__
-        #define __AAPCS_VFP__
-        #define __AAPCS16__
-        #define __AAPCS32__
-        #define __AAPCS64__
-        #define __APCS__
-        #define __APCS_VFP__
-        #define __APCS16__
-        #define __APCS32__
-        #define __APCS64__
+        #define AAPCS__
+        #define AAPCS_VFP__
+        #define AAPCS16__
+        #define AAPCS32__
+        #define AAPCS64__
+        #define APCS__
+        #define APCS_VFP__
+        #define APCS16__
+        #define APCS32__
+        #define APCS64__
     #endif
 
     #if defined(__riscv)
-        #define __RISCV_ABI__
+        #define RISCV_ABI__
     #endif
 
     #if defined(__powerpc__) || defined(__powerpc64__)
-        #define __PPC_ABI__
+        #define PPC_ABI__
     #endif
 #endif
 
 /*  Attributes */
-#define _aligned_(x) __ALIGNED__(x)                                           /*  Align something to a boundary of x bytes */
-#define _malloc_(x, y) __MALLOC__(x, y)                                       /*  Declare that a function allocates memory and returns a pointer to it */
-#define _noreturn_ __NORETURN__                                               /*  Declare that a function never returns */
-#define _nothrow_ __NOTHROW__                                                 /*  Declare that a function never throws an exception */
-#define _nonnull_(x) __NONNULL__(x)                                           /*  Declare that a function doesn't accept NULL as an argument */
-#define _forced_inline_ __INLINE__                                            /*  Declare that a function should always be inlined */
-#define _deprecated_ __DEPRECATED__                                           /*  Declare that a function is deprecated */
-#define _unused_ __UNUSED__                                                   /*  Declare that a variable is unused */
+#define _aligned_(x) ALIGNED__(x)                                           /*  Align something to a boundary of x bytes */
+#define _malloc_(x, y) MALLOC__(x, y)                                       /*  Declare that a function allocates memory and returns a pointer to it */
+#define _noreturn_ NORETURN__                                               /*  Declare that a function never returns */
+#define _nothrow_ NOTHROW__                                                 /*  Declare that a function never throws an exception */
+#define _nonnull_(x) NONNULL__(x)                                           /*  Declare that a function doesn't accept NULL as an argument */
+#define _forced_inline_ INLINE__                                            /*  Declare that a function should always be inlined */
+#define _deprecated_ DEPRECATED__                                           /*  Declare that a function is deprecated */
+#define _unused_ UNUSED__                                                   /*  Declare that a variable is unused */
 #define _format_(archetype, index, first) __FORMAT__(archetype, index, first) /*  Declare that a function uses printf-style formatting */
-#define _pure_ __PURE__                                                       /*  Declare that a function has no side effects */
-#define _const_ __CONST__                                                     /*  Declare that a function has no side effects and doesn't read global memory */
-#define _weak_ __WEAK__                                                       /*  Declare that a function is weakly linked */
-#define _packed_ __PACKED__                                                   /*  Declare that a struct should be packed */
-#define _hot_ __HOT__                                                         /*  Declare that a function is "hot" (likely to be executed) */
-#define _cold_ __COLD__                                                       /*  Declare that a function is "cold" (unlikely to be executed) */
-#define _alloc_align_(x) __ALLOC_ALIGN__(x)                                   /*  Declare that a function allocates memory aligned to x bytes */
+#define _pure_ PURE__                                                       /*  Declare that a function has no side effects */
+#define _const_ CONST__                                                     /*  Declare that a function has no side effects and doesn't read global memory */
+#define _weak_ WEAK__                                                       /*  Declare that a function is weakly linked */
+#define _packed_ PACKED__                                                   /*  Declare that a struct should be packed */
+#define _hot_ HOT__                                                         /*  Declare that a function is "hot" (likely to be executed) */
+#define _cold_ COLD__                                                       /*  Declare that a function is "cold" (unlikely to be executed) */
+#define _alloc_align_(x) ALLOC_ALIGN__(x)                                   /*  Declare that a function allocates memory aligned to x bytes */
 #if __STDC_VERSION__ >= 201112L || defined(__cplusplus)
     #define _atomic_ _Atomic                                                  /*  Declare that a function variable is atomic */
 #else
-    #define _atomic_ __ATOMIC__                                               /*  Declare that a function or variable is atomic */
+    #define _atomic_ ATOMIC__                                               /*  Declare that a function or variable is atomic */
 #endif
-#define _interrupt_ __INTERRUPT__                                             /*  Declare that a function is an interrupt handler */
+#define _interrupt_ INTERRUPT__                                             /*  Declare that a function is an interrupt handler */
 
 /*  Calling conventions/ABIs */
 #if defined(__x86_64__) || defined(__i386__)
-    #define _ms_abi_ __MS_ABI__                                                /*  Declare that a function uses the Microsoft ABI */
-    #define _sysv_abi_ __SYSV_ABI__                                            /*  Declare that a function uses the System V ABI (AMD64 only) */
-    #define _cdecl_ __CDECL__                                                  /*  Declare that a function uses the CDECL calling convention (i86 and i386 only) */
-    #define _stdcall_ __STDCALL__                                              /*  Declare that a function uses the STDCALL calling convention */
-    #define _fastcall_ __FASTCALL__                                            /*  Declare that a function uses the FASTCALL calling convention (16 and 32 bit only) */
-    #define _efiapi_ __MS_ABI__                                                /*  Declare that a function uses the EFI API */
+    #define _ms_abi_ MS_ABI__                                                /*  Declare that a function uses the Microsoft ABI */
+    #define _sysv_abi_ SYSV_ABI__                                            /*  Declare that a function uses the System V ABI (AMD64 only) */
+    #define _cdecl_ CDECL__                                                  /*  Declare that a function uses the CDECL calling convention (i86 and i386 only) */
+    #define _stdcall_ STDCALL__                                              /*  Declare that a function uses the STDCALL calling convention */
+    #define _fastcall_ FASTCALL__                                            /*  Declare that a function uses the FASTCALL calling convention (16 and 32 bit only) */
+    #define _efiapi_ MS_ABI__                                                /*  Declare that a function uses the EFI API */
 #elif defined(__arm__) || defined(__aarch64__)
-    #define _aapcs_ __AAPCS__                                                  /*  Declare that a function uses the AAPCS ABI */
-    #define _aapcs_vfp_ __AAPCS_VFP__                                          /*  Declare that a function uses the AAPCS VFP ABI */
-    #define _aapcs16_ __AAPCS16__                                              /*  Declare that a function uses the AAPCS16 ABI */
-    #define _aapcs32_ __AAPCS32__                                              /*  Declare that a function uses the AAPCS32 ABI */
-    #define _aapcs64_ __AAPCS64__                                              /*  Declare that a function uses the AAPCS64 ABI */
-    #define _apcs_ __APCS__                                                    /*  Declare that a function uses the APCS ABI */
-    #define _apcs_vfp_ __APCS_VFP__                                            /*  Declare that a function uses the APCS VFP ABI */
-    #define _apcs16_ __APCS16__                                                /*  Declare that a function uses the APCS16 ABI */
-    #define _apcs32_ __APCS32__                                                /*  Declare that a function uses the APCS32 ABI */
-    #define _apcs64_ __APCS64__                                                /*  Declare that a function uses the APCS64 ABI */
+    #define _aapcs_ AAPCS__                                                  /*  Declare that a function uses the AAPCS ABI */
+    #define _aapcs_vfp_ AAPCS_VFP__                                          /*  Declare that a function uses the AAPCS VFP ABI */
+    #define _aapcs16_ AAPCS16__                                              /*  Declare that a function uses the AAPCS16 ABI */
+    #define _aapcs32_ AAPCS32__                                              /*  Declare that a function uses the AAPCS32 ABI */
+    #define _aapcs64_ AAPCS64__                                              /*  Declare that a function uses the AAPCS64 ABI */
+    #define _apcs_ APCS__                                                    /*  Declare that a function uses the APCS ABI */
+    #define _apcs_vfp_ APCS_VFP__                                            /*  Declare that a function uses the APCS VFP ABI */
+    #define _apcs16_ APCS16__                                                /*  Declare that a function uses the APCS16 ABI */
+    #define _apcs32_ APCS32__                                                /*  Declare that a function uses the APCS32 ABI */
+    #define _apcs64_ APCS64__                                                /*  Declare that a function uses the APCS64 ABI */
 #elif defined(__riscv)
-    #define _riscv_abi_ __RISCV_ABI__                                          /*  Declare that a function uses the RISC-V ABI */
+    #define _riscv_abi_ RISCV_ABI__                                          /*  Declare that a function uses the RISC-V ABI */
 #elif defined(__powerpc__) || defined(__powerpc64__)
-    #define _ppc_abi_ __PPC_ABI__                                              /*  Declare that a function uses the PowerPC ABI */
+    #define _ppc_abi_ PPC_ABI__                                              /*  Declare that a function uses the PowerPC ABI */
 #else
     /*#warning "Unsupported architecture"*/
 #endif
@@ -754,7 +754,7 @@ typedef __builtin_va_list _united_va_list_;
 
 /* Define the _Alignof keyword */
 #ifndef _Alignof
-    #define _Alignof(x) ((__size_t_unknown__)(&((struct { char c; type x; } *)0)->x))
+    #define _Alignof(x) ((united_size_t)(&((struct { char c; type x; } *)0)->x))
 #endif
 
 /* Define _Atomic if it doesn't exist (must figure out how to do this properly) */
