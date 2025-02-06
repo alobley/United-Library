@@ -43,7 +43,7 @@ typedef enum {
     __typ_ldouble__ = 13,
     __typ_ptr__ = 14,
     __typ_vptr__ = 15
-} united_type_t__;
+} united_type_t;
 
 
 #if defined(__GNUC__)
