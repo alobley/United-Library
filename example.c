@@ -60,7 +60,7 @@ void LongLongTest(void) {
 
 _vla_(char, str) = "Hello, world!";
 
-/* This whole file uses ANSI C for programming, and should work with the mainstream compilers. */
+/* This whole file is made with ANSI C, and should work with the mainstream compilers. The code should not have to change at all. */
 c_style int main(void) {
     printf("United.h feature test:\n");
 

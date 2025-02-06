@@ -681,7 +681,7 @@ typedef __builtin_va_list _united_va_list_;
         return quotient;
     }
 
-    /* Try to add VLA support for Ansi C compilers (WARNING: IS A POINTER) */
+    /* Try to add VLA support for ANSI C compilers (WARNING: IS A POINTER) */
     #define _vla_(type, name) const type* name
 #else
     typedef long long _long_long_;
