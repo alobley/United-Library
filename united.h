@@ -4,7 +4,7 @@
 extern "C" {
 #endif
 
-/* This is a small C/C++ library meant to bridge the syntax of multiple compilers and C standards together to provide a consistent, readable interface for programmers. */
+/* This is a relatively small C/C++ library meant to bridge the syntax of multiple compilers and C standards together to provide a consistent, readable interface for programmers. */
 /* This means that the syntax of C and C++ (with this library) should be the same regardless of the compiler being used. C++ exclusive features are not supported. */
 /* This is a work in progress and will be updated as needed. */
 
