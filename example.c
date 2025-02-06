@@ -98,6 +98,8 @@ c_style int main(void) {
     #elif defined(__i386__)
     CdeclFunction();
     FastcallFunction();
+    #else
+    printf("Calling conventions on this architecture differ little.\n");
     #endif
     return 0;
 }
