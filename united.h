@@ -20,6 +20,7 @@ extern "C" {
  * - Fully define inline
  * - Fully define Thread_local for C89 and C99
  * - Fully define _Static_assert for C89 and C99
+ * - Add atomic operations for each supported architecture
 */
 
 /* Define an unreliable multiplatform size_t type */
@@ -363,7 +364,7 @@ typedef enum {
 #define _hot_ __HOT__                                                         /*  Declare that a function is "hot" (likely to be executed) */
 #define _cold_ __COLD__                                                       /*  Declare that a function is "cold" (unlikely to be executed) */
 #define _alloc_align_(x) __ALLOC_ALIGN__(x)                                   /*  Declare that a function allocates memory aligned to x bytes */
-#define _atomic_ __ATOMIC__                                                   /*  Declare that a function (or variable?) is atomic */
+#define _atomic_ __ATOMIC__                                                   /*  Declare that a function or variable is atomic */
 #define _interrupt_ __INTERRUPT__                                             /*  Declare that a function is an interrupt handler */
 
 /*  Calling conventions/ABIs */
