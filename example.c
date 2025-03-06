@@ -30,8 +30,8 @@ _sysv_abi_ void SysvFunction(void) {
     printf("This function uses the SysV ABI calling convention.\n");
 }
 
-_ms_abi_ void FastcallFunction(void) {
-    printf("This function uses the fastcall calling convention.\n");
+_ms_abi_ void MsFunction(void) {
+    printf("This function uses the Microsoft calling convention.\n");
 }
 #elif defined(__i386__)
 _cdecl_ void CdeclFunction(void) {
@@ -60,7 +60,7 @@ void LongLongTest(void) {
 
 united_vla(char, str) = "I am a variable length array.";
 
-/* This whole file is made with ANSI C, and should work with the mainstream compilers. The code should not have to change at all. */
+/* This whole file is made with C89 syntax, and should work with the mainstream compilers. The code should not have to change at all. */
 c_style int main(void) {
     printf("United.h feature test:\n");
 
@@ -94,7 +94,7 @@ c_style int main(void) {
     printf("Calling conventions test:\n");
     #if defined(__x86_64__)
     SysvFunction();
-    FastcallFunction();
+    MsFunction();
     #elif defined(__i386__)
     CdeclFunction();
     FastcallFunction();

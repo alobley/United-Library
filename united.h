@@ -737,10 +737,10 @@ typedef __builtin_va_list _united_va_list_;
     #define _ulong_long_neg_(x) (x = -(x))
     #define _ulong_long_cast_(name, value) ((unsigned long long)(value))
 
-    #define _vla_(type, name) type name[]
+    #define united_vla(type, name) type name[]
 
     /* Define a for loop. Code MUST be in brackets. */
-    #define _for_(var, condition, increment, code) for(var; condition; increment){ code }
+    #define united_for(var, condition, increment, code) for(var; condition; increment){ code }
 
     #define localvar(code) code
 #endif
